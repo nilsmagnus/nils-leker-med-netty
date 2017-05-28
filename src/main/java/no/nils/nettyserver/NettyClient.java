@@ -69,8 +69,10 @@ public class NettyClient {
     public void send(int port, String host) {
         try {
             // Start the client.
-            ChannelFuture channelFuture = bootstrap.connect(host, port); // (5)
-            channelFuture.channel().close();
+            ChannelFuture channelFuture = bootstrap.connect(host, port).sync(); // (5)
+            //channelFuture.channel().writeAndFlush("hello".getBytes());
+            ChannelFuture clof = channelFuture.channel().close();
+            clof.await(100, TimeUnit.MILLISECONDS);
             // Wait until the connection is closed.
         } catch (Exception e) {
             e.printStackTrace();

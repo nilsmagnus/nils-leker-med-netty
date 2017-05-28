@@ -36,7 +36,7 @@ public class NettyServerLoadTest {
         }));
 
         System.out.println("Awaiting latch");
-        boolean allMessagesReceived = countDownLatch.await(5, TimeUnit.SECONDS);
+        boolean allMessagesReceived = countDownLatch.await(30, TimeUnit.SECONDS);
 
         System.out.println("latches left:" + countDownLatch.getCount());
         assert allMessagesReceived;
